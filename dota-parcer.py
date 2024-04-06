@@ -65,21 +65,21 @@ bot = telebot.TeleBot(token)
 def echo_message(message):
     text = message.text
     if text=='/start':
-       bot.send_message(message.chat.id, (f'Напиши любое из этих имен. Если напишешь не правильно, то просто напиши заново :)'))
-       bot.send_message(message.chat.id, (f'{heroes_for_telegramm}'))
+        bot.send_message(message.chat.id, (f'Напиши любое из этих имен. Если напишешь не правильно, то просто напиши заново :)'))
+        bot.send_message(message.chat.id, (f'{heroes_for_telegramm}'))
     else:
-       hero_name = str(text)
-       if sovpadeniya(hero_name):
-           result = vichlenenie(hero_name)
-           for item in result:
-                 hero = item[0].lower()
-                 disadvantage = item[1]
-                 win_rate = item[2]
-                 if float(disadvantage[:-1]) >= 1:
-                     bot.send_message(message.chat.id, (f"{hero}: {win_rate} - процентов побед \n\n{disadvantage} - неудобства "))
-                     bot.send_message(message.chat.id, (f'Это все что мне удалось найти о {hero_name} :)'))
-                 else: 
-                     bot.send_message(message.chat.id, (f'Неправильно написал героя! Напиши заново пожалуйста :)'))
-
-
+        hero_name = str(text)
+        if sovpadeniya(hero_name):
+            result = vichlenenie(hero_name)
+            for item in result:
+                hero = item[0].lower()
+                disadvantage = item[1]
+                win_rate = item[2]
+                if float(disadvantage[:-1]) >= 1:
+                    bot.send_message(message.chat.id, (f"{hero}: {win_rate} - процентов побед \n\n{disadvantage} - неудобства "))
+                else: 
+                    bot.send_message(message.chat.id, (f'Неправильно написал героя! Напиши заново пожалуйста :)'))
+                    break
+        bot.send_message(message.chat.id, (f'Это все что мне удалось найти о {hero_name} :)'))
 bot.infinity_polling()
+
